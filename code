@@ -1,0 +1,96 @@
+#players details
+autherised_player1 = False 
+autherised_player2 = False 
+print("_________________DICE GAME________________! \n     LOGIN: Players")
+#autherised_player1,2 stars with false but becomes true if the == in the 2 arrays
+player1 = input("Enter your username player1 \n")
+player2 = input("Enter your username player2\n")
+authplay = ["Aylin Yeter","MR Cool","Donald Duck"]
+passw = ["password2","notCool20","DUCK2--2"]
+
+while autherised_player1 == False and autherised_player2 == False:
+  if player1 and player2 == authplay[0] or player1 and player2 == authplay[1] or player1 and player2 == authplay[2] :
+    print("Found Name!!!!!")
+    break
+#loop breaks due to found name
+  elif player1 and player2 != authplay[0] or player1 and player2 != authplay[1] or player1 and player2 != authplay[2]:
+    print(".........")
+    print("Incorrect name \n TRY AGAIN")
+  exit()
+
+passw1= input ("Enter Password player1\n")
+passw2= input ("Enter Password  player2\n")
+if passw1 and passw2 == passw[0] or passw1 and passw2 == passw[1] or passw1 and passw2== passw[2]:
+  print("Correct password \n Autherised", player1,"and", player2,"welcome\n")
+  autherised_player1 = True 
+  autherised_player2 = True
+else:
+  print("Unautherised ACCESS \n try again")
+  autherised_player1 = False
+  autherised_player2 = False
+  #stays false and kicks you out of the game
+  exit()
+#end of autherised loop
+
+#points of both player1 and player2
+player1_points = 0
+plater2_points = 0
+ 
+print("   START GAME \n")
+import random
+def Dice_rolls():
+  total_points = 0
+  dice1 = random.randint(1, 6)
+  dice2 = random.randint(1, 6)
+  #the extra dice that would be rolled if both dices are equal
+  di = random.randint(1, 6)
+  #The points rolled on each player’s dice are added to their score
+  Dice_total = dice1 + dice2
+  total_points = total_points + Dice_total
+  if Dice_total %2 == 0:
+  #If the total is an even number, an additional 10 points are added to their score.  
+    total_points+10
+  else:
+    total_points-5
+    #If the total is an odd number, 5 points are subtracted from their score
+  if dice1 == dice2:
+    total_points = total_points+di
+  return total_points
+# if both dice rolls are equal = they get to roll one extra die and get the number of points rolled added to total_points
+Dice_rolls() 
+
+for i in range(5):
+  #Allows the players to play 5 rounds.
+    player1_points+= Dice_rolls()
+    plater2_points+= Dice_rolls()
+  # adds up the points with rules of how it works== Dice_rolls
+    print(player1,"points :",player1_points)
+    print(player2,"points:",plater2_points)
+  #displays 5 rounds of points
+
+def Winner_ofgame():
+  if player1_points<plater2_points:
+   winner = player2
+   winpoint = plater2_points
+   print("\n \nWINNER OF GAME",winner,"\n Total points of",plater2_points)
+  if player1_points>plater2_points:
+    winner = player1
+    winpoint = player1_points
+    print("\n \nWINNER OF GAME",winner,"\n Total points of",player1_points)
+# If both players have the same score at the end of the 5 rounds, they each roll 1 die and whoever gets the highest score wins
+  if player1_points==plater2_points:
+    print("\n TIE Breaker")
+    Tie1 = random.randint(1,6)
+    Tie2_breaker = random.randint(1,6)
+    print("dice1: {Tie1} \n dice2: {Tie2_breaker}")
+    if Tie1 > Tie2_breaker:
+        winner = player1
+        winpoint=Tie1
+        print("\n \nWINNER OF GAME",winner,"\nDice role:",Tie1)
+    if Tie2_breaker > Tie1:
+      winner = player2
+      winpoint=Tie2_breaker
+      print("\n \nWINNER OF GAME",winner,"\nDice role:",Tie2_breaker)
+Winner_ofgame()
+
+print("\n \n Leaderboard:")
